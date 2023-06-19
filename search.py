@@ -96,7 +96,10 @@ def DFS(problem, currentPosition, directions, visitedNodes):
     if(problem.isGoalState(currentPosition)):
         return directions
 
-    for state in problem.getSuccessors(currentPosition):
+    children = problem.getSuccessors(currentPosition)
+    children.reverse()
+
+    for state in children:
         if state[0] not in visitedNodes:
             finalDirections = DFS(problem, state[0], directions + [state[1]], visitedNodes + [state[0]])
                 
