@@ -95,25 +95,27 @@ def depthFirstSearch(problem):
     parents = {}
     parents[problem.getStartState()] = None
     while not open.isEmpty():
+        #print(f'open {open.list}')
         X = open.pop()
+        #print(f'X {X}')
+        #print(f'open after pop {open.list}')
         closed.push(X)
 
         if problem.isGoalState(X):
-            path_list = util.Queue()
+            path_list = []
             parent = parents[X] # gives back a whole ('A', ('C', '1:A->C', 2.0))
             while parent is not None:
-                path_list.push(parent[1][1]) # add just the path part
+                path_list.insert(0,parent[1][1]) # add just the path part
                 parent = parents[parent[0]] # look up next parent
                 
-            return path_list.list
+            return path_list
 
         children = problem.getSuccessors(X)
         keep_children_labels = []
         for child in children:
-            if not (child[0] in open.list):
-                if not (child[0] in closed.list):
-                    keep_children_labels.append(child[0])
-                    parents[child[0]] = (X, (child))  # set the child's id key, like 'B' to give it's parent (the current state) such as ('A', ('B', '0:A->B', 1.0))
+            if not (child[0] in closed.list):
+                keep_children_labels.append(child[0])
+                parents[child[0]] = (X, (child))  # set the child's id key, like 'B' to give it's parent (the current state) such as ('A', ('B', '0:A->B', 1.0))
 
         kcl_reversed = keep_children_labels[::-1] # hashtag justpythonthings
         for child in kcl_reversed:
