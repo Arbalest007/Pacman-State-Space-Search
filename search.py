@@ -89,10 +89,9 @@ def depthFirstSearch(problem):
     return DFS(problem, problem.getStartState(), directions, visitedNodes + [problem.getStartState()])
         
 def DFS(problem, currentPosition, directions, visitedNodes):
-    children = util.Stack()
-
-    print(directions)
-    print(visitedNodes)
+    # Debugging
+    # print(directions)
+    # print(visitedNodes)
 
     if(problem.isGoalState(currentPosition)):
         return directions
