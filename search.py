@@ -72,63 +72,6 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
-# def depthFirstSearch(problem):
-#     """
-#     Search the deepest nodes in the search tree first.
-
-#     Your search algorithm needs to return a list of actions that reaches the
-#     goal. Make sure to implement a graph search algorithm.
-
-#     To get started, you might want to try some of these simple commands to
-#     understand the search problem that is being passed in:
-
-#     print("Start:", problem.getStartState())
-#     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-#     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-#     """
-#     "*** YOUR CODE HERE ***"
-#     # print("Start:", problem.getStartState())
-#     # print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-#     # print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-    
-#     # board = util.Stack()
-#     # startState = problem.getStartState()
-
-#     # for state in problem.getSuccessors:
-#     #     print state[1]
-
-#     # print(problem2Sub)
-    
-#     path = util.Stack()
-#     startState = problem.getStartState()
-
-#     item = [[], [problem.getStartState()]]
-#     for state in problem.getSuccessors(startState):
-#         print(state[0])
-#         print(state[1])
-
-#     util.raiseNotDefined()
-        
-# # Recursive DFS Solution
-# # def DFS(problem, item):
-# #     paths = util.Stack()
-
-# #     if problem.isGoalState(item[1][-1]):
-# #         return item[0]
-
-# #     print([item[1]]) \
-# #     [ paths.push([item[0]+[state[1]], item[1]+[state[0]]]) \
-# #         for state in problem.getSuccessors(item[1][-1]) if not state[0] in item[1]]
-
-# #     while not paths.isEmpty():
-# #         directions = DFS(problem, paths.pop())
-
-# #         if directions:
-# #             return directions
-
-# # def DFS(problem, node, visited):
-# #     if
-
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
@@ -154,24 +97,12 @@ def DFS(problem, currentPosition, directions, visitedNodes):
     if(problem.isGoalState(currentPosition)):
         return directions
 
-    # for state in problem.getSuccessors(currentPosition):
-    #     if state[0] not in visitedNodes:
-    #         children.push(state)
-        
-    # while not children.isEmpty():
-    #     possiblePath = children.pop()
-
-    #     finalDirections = DFS(problem, possiblePath[0], directions + [possiblePath[1]], visitedNodes + [possiblePath[0]])
-
-    #     if finalDirections is not None:
-    #         return finalDirections
-
-    # for state in problem.getSuccessors(currentPosition):
-    #     if state[0] not in visitedNodes:
-    #         finalDirections = DFS(problem, state[0], directions + [state[1]], visitedNodes + [state[0]])
+    for state in problem.getSuccessors(currentPosition):
+        if state[0] not in visitedNodes:
+            finalDirections = DFS(problem, state[0], directions + [state[1]], visitedNodes + [state[0]])
                 
-    #         if finalDirections is not None:
-    #             return finalDirections
+            if finalDirections is not None:
+                return finalDirections
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
