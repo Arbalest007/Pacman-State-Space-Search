@@ -82,12 +82,48 @@ def depthFirstSearch(problem):
     To get started, you might want to try some of these simple commands to
     understand the search problem that is being passed in:
 
+    """
+    """
     print("Start:", problem.getStartState())
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
+
+    open = util.Stack() # if we put the children on in reverse order, then it is same as pulling from the left
+    open.push(problem.getStartState())
+    closed = util.Queue()
+    parents = {}
+    parents[problem.getStartState()] = None
+    while not open.isEmpty():
+        X = open.pop()
+        closed.push(X)
+
+        if problem.isGoalState(X):
+            path_list = util.Queue()
+            parent = parents[X] # gives back a whole ('A', ('C', '1:A->C', 2.0))
+            while parent is not None:
+                path_list.push(parent[1][1]) # add just the path part
+                parent = parents[parent[0]] # look up next parent
+                
+            return path_list.list
+
+        children = problem.getSuccessors(X)
+        keep_children_labels = []
+        for child in children:
+            if not (child[0] in open.list):
+                if not (child[0] in closed.list):
+                    keep_children_labels.append(child[0])
+                    parents[child[0]] = (X, (child))  # set the child's id key, like 'B' to give it's parent (the current state) such as ('A', ('B', '0:A->B', 1.0))
+
+        kcl_reversed = keep_children_labels[::-1] # hashtag justpythonthings
+        for child in kcl_reversed:
+            open.push(child) 
+
+    return []
+    """
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+    """
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
