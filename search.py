@@ -73,6 +73,7 @@ def tinyMazeSearch(problem):
     return  [s, s, w, s, w, w, s, w]
 
 def depthFirstSearch(problem):
+    return Most_of_Best_First(problem, algorithm='DFS')
     """
     Search the deepest nodes in the search tree first.
 
@@ -89,7 +90,15 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
 
-    open = util.Stack() # if we put the children on in reverse order, then it is same as pulling from the left
+def Most_of_Best_First(problem, algorithm):
+    if algorithm == 'DFS':
+        open_structure= util.Stack
+    elif algorithm == 'BFS':
+        open_structure= util.Queue
+    else:
+        raise NotImplementedError(f'algorithm {algorithm} not avaialable')
+    
+    open = open_structure() # if we put the children on in reverse order, then it is same as pulling from the left
     open.push(problem.getStartState())
     closed = util.Queue()
     parents = {}
@@ -110,14 +119,17 @@ def depthFirstSearch(problem):
                 
             return path_list.list
 
+        # generate successors and filter down
         children = problem.getSuccessors(X)
         keep_children_labels = []
         for child in children:
             if not (child[0] in closed.list):
-                keep_children_labels.append(child[0])
-                parents[child[0]] = (X, (child))  # set the child's id key, like 'B' to give it's parent (the current state) such as ('A', ('B', '0:A->B', 1.0))
+                if algorithm != 'BFS' or (not child[0] in open.list): # idk why this check is only good on BFS
+                    keep_children_labels.append(child[0])
+                    parents[child[0]] = (X, (child))  # set the child's id key, like 'B' to give it's parent (the current state) such as ('A', ('B', '0:A->B', 1.0))
 
-        kcl_reversed = keep_children_labels[::-1] # hashtag justpythonthings
+        #kcl_reversed = keep_children_labels[::-1] # I guess don't reverse after all?
+        kcl_reversed = keep_children_labels # hashtag justpythonthings
         for child in kcl_reversed:
             open.push(child) 
 
@@ -130,7 +142,7 @@ def depthFirstSearch(problem):
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return Most_of_Best_First(problem, algorithm='BFS')
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
