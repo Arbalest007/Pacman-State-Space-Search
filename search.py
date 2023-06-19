@@ -102,13 +102,13 @@ def depthFirstSearch(problem):
         closed.push(X)
 
         if problem.isGoalState(X):
-            path_list = []
+            path_list = util.Queue()
             parent = parents[X] # gives back a whole ('A', ('C', '1:A->C', 2.0))
             while parent is not None:
-                path_list.insert(0,parent[1][1]) # add just the path part
+                path_list.push(parent[1][1]) # add just the path part
                 parent = parents[parent[0]] # look up next parent
                 
-            return path_list
+            return path_list.list
 
         children = problem.getSuccessors(X)
         keep_children_labels = []
