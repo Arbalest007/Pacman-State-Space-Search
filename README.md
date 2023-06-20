@@ -17,7 +17,4 @@ you should be able to play a game of Pacman by typing the following at the comma
 
 ![][pacman_game]
 
-
-
-
-[pacman_game]: pacman.mov
+https://youtu.be/mnCMYA3H7IA
