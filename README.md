@@ -29,5 +29,7 @@ you should be able to play a game of Pacman by typing the following at the comma
 - Watch the score either decrease or increase as pacman tries to win the game
 
 
-[![Watch the video](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.smashbros.com%2Fwiiu-3ds%2Fsp%2Fus%2Fcharacters%2Fpac-man.html&psig=AOvVaw0RZgZbjEpyyoIP9vTSG_QJ&ust=1687333892627000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJCNzd2u0f8CFQAAAAAdAAAAABAE)](https://youtu.be/mnCMYA3H7IA)
+
+https://github.com/Arbalest007/Pacman-State-Space-Search/assets/47754309/926bd893-7bd6-439e-b224-66d4c19c4349
+
 
