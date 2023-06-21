@@ -73,43 +73,74 @@ def tinyMazeSearch(problem):
     return  [s, s, w, s, w, w, s, w]
 
 def depthFirstSearch(problem):
+    return Most_of_Best_First(problem, algorithm='DFS')
     """
     Search the deepest nodes in the search tree first.
     Your search algorithm needs to return a list of actions that reaches the
     goal. Make sure to implement a graph search algorithm.
     To get started, you might want to try some of these simple commands to
     understand the search problem that is being passed in:
-    print "Start:", problem.getStartState()
-    print "Is the start a goal?", problem.isGoalState(problem.getStartState())
-    print "Start's successors:", problem.getSuccessors(problem.getStartState())
+
     """
-    directions = []
-    visitedNodes = []
+    """
+    print("Start:", problem.getStartState())
+    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+    """
 
-    return DFS(problem, problem.getStartState(), directions, visitedNodes + [problem.getStartState()])
-        
-def DFS(problem, currentPosition, directions, visitedNodes):
-    # Debugging
-    # print(directions)
-    # print(visitedNodes)
+def Most_of_Best_First(problem, algorithm):
+    if algorithm == 'DFS':
+        open_structure= util.Stack
+    elif algorithm == 'BFS':
+        open_structure= util.Queue
+    else:
+        raise NotImplementedError(f'algorithm {algorithm} not avaialable')
+    
+    open = open_structure() # if we put the children on in reverse order, then it is same as pulling from the left
+    open.push(problem.getStartState())
+    closed = util.Queue()
+    parents = {}
+    parents[problem.getStartState()] = None
+    while not open.isEmpty():
+        #print(f'open {open.list}')
+        X = open.pop()
+        #print(f'X {X}')
+        #print(f'open after pop {open.list}')
+        closed.push(X)
 
-    if(problem.isGoalState(currentPosition)):
-        return directions
-
-    children = problem.getSuccessors(currentPosition)
-    children.reverse()
-
-    for state in children:
-        if state[0] not in visitedNodes:
-            finalDirections = DFS(problem, state[0], directions + [state[1]], visitedNodes + [state[0]])
+        if problem.isGoalState(X):
+            path_list = util.Queue()
+            parent = parents[X] # gives back a whole ('A', ('C', '1:A->C', 2.0))
+            while parent is not None:
+                path_list.push(parent[1][1]) # add just the path part
+                parent = parents[parent[0]] # look up next parent
                 
-            if finalDirections is not None:
-                return finalDirections
+            return path_list.list
+
+        # generate successors and filter down
+        children = problem.getSuccessors(X)
+        keep_children_labels = []
+        for child in children:
+            if not (child[0] in closed.list):
+                if algorithm != 'BFS' or (not child[0] in open.list): # idk why this check is only good on BFS
+                    keep_children_labels.append(child[0])
+                    parents[child[0]] = (X, (child))  # set the child's id key, like 'B' to give it's parent (the current state) such as ('A', ('B', '0:A->B', 1.0))
+
+        #kcl_reversed = keep_children_labels[::-1] # I guess don't reverse after all?
+        kcl_reversed = keep_children_labels # hashtag justpythonthings
+        for child in kcl_reversed:
+            open.push(child) 
+
+    return []
+    """
+    "*** YOUR CODE HERE ***"
+    util.raiseNotDefined()
+    """
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return Most_of_Best_First(problem, algorithm='BFS')
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
