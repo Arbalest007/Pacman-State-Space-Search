@@ -1,3 +1,17 @@
+# Installation
+This requires python 3.6, I already have 3.11 installed and don't want to affect other projects.
+I have conda installed, so using [this](https://stackoverflow.com/questions/43630002/conda-install-downgrade-python-version) as a guide I created a new conda env with:
+
+`conda create --name pacman python=3.6 anaconda`
+
+Then:
+
+`conda activate pacman`
+
+When done:
+
+`conda deactivate`
+
 # Pacman State Space Search Game
 
 Pacman State Space Search Game consists of learning BFS and DFS to find paths within the maze world, both to reach a particular location and to collect food efficiently. This program was written in Python 3.6 
