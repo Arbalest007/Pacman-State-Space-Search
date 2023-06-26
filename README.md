@@ -35,6 +35,6 @@ When done running this project:
 
 `conda deactivate`
 
-## Additional Info
+# Additional Info
 
-- Retrieve this code by either downloading a copy from Github or cloning the repository [here](https://github.com/Arbalest007/Pacman-State-Space-Search)
+- Retrieve the code by either downloading or cloning the repository [here](https://github.com/Arbalest007/Pacman-State-Space-Search)
