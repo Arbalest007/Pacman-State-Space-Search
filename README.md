@@ -1,6 +1,29 @@
-# Installation
-This requires python 3.6, I already have 3.11 installed and don't want to affect other projects.
-I have conda installed, so using [this](https://stackoverflow.com/questions/43630002/conda-install-downgrade-python-version) as a guide I created a new conda env with:
+###### Project: CPSC 481 - Pacman State Space Search
+###### Group Name: Some Name
+###### Authors: Gabriel Warkentin, Patrick Lin, Kevin Duarte, Olvin Bolanos
+
+# About
+
+**Pacman State Space Search Game** consists of learning BFS and DFS to find paths within the maze world, both to reach a particular location and to collect food efficiently. This program was written in Python 3.6. 
+
+You should be able to play a game of Pacman by typing the following at the command line:
+
+     python3 pacman.py
+
+To test DFS, run the following commands:
+
+     python pacman.py -l tinyMaze -p SearchAgent
+     python pacman.py -l mediumMaze -p SearchAgent
+     python pacman.py -l bigMaze -z .5 -p SearchAgent
+
+To test BFS, run the following commands:
+
+     python pacman.py -l mediumMaze -p SearchAgent -a fn=bfs
+     python pacman.py -l bigMaze -p SearchAgent -a fn=bfs -z .5
+
+# Installation Troubleshooting
+
+This project requires a minimum of Python 3.6 but may not work if you are on Python 3.11 or above. If you have a newer version of Python and are having issues with running this project, you can make a separate environment using conda with the guide [here](https://stackoverflow.com/questions/43630002/conda-install-downgrade-python-version):
 
 `conda create --name pacman python=3.6 anaconda`
 
@@ -8,28 +31,10 @@ Then:
 
 `conda activate pacman`
 
-When done:
+When done running this project:
 
 `conda deactivate`
 
-# Pacman State Space Search Game
+## Additional Info
 
-Pacman State Space Search Game consists of learning BFS and DFS to find paths within the maze world, both to reach a particular location and to collect food efficiently. This program was written in Python 3.6 
-
-you should be able to play a game of Pacman by typing the following at the command line:
-
-     python3 pacman.py
-
-## Features
-
-- Import the zip file by either downloading a copy from github or doing a git clone repository
-
-- Watch the State Space Search Algorithm try and figure out what is the best route to take for pacman
-
-- Watch the score either decrease or increase as pacman tries to win the game
-
-
-
-https://github.com/Arbalest007/Pacman-State-Space-Search/assets/47754309/926bd893-7bd6-439e-b224-66d4c19c4349
-
-
+- Retrieve this code by either downloading a copy from Github or cloning the repository [here](https://github.com/Arbalest007/Pacman-State-Space-Search)
